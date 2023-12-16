@@ -80,7 +80,12 @@ def getAlbumPath(album):
     retpath = retpath.strip()
     # Hack to fix regression causing leading space in album names without flags
     # caused by the removal of crucial path fixing functions during refactoring.
+    # These print statements execute for every album and each track, since getAlbumPath
+    # is called by getTrackPath. But it's also printed an extra time for each album
+    # and it's not clear why. This may be useful in tracking function calls.
+    # print(retpath)
     retpath = retpath.replace(r'/ ', r'/')
+    # print(retpath)
     return f"{SETTINGS.downloadPath}/{retpath}"
 
 def getPlaylistPath(playlist):
