@@ -78,6 +78,9 @@ def getAlbumPath(album):
     retpath = retpath.replace(R"{RecordType}", album.type)
     retpath = retpath.replace(R"{None}", "")
     retpath = retpath.strip()
+    # Hack to fix regression causing leading space in album names without flags
+    # caused by the removal of crucial path fixing functions during refactoring.
+    retpath = retpath.replace(r'/ ', r'/')
     return f"{SETTINGS.downloadPath}/{retpath}"
 
 def getPlaylistPath(playlist):
